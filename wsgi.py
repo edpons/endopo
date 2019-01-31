@@ -18,12 +18,14 @@ def hotels():
 	sigStr = "%s%s%d" % (api_key,secret,int(time.time()))
 	signature = hashlib.sha256(sigStr.encode('utf-8')).hexdigest()
 
-	request.headers['Api-Key'] = api_key
-	request.headers['X-Signature'] = signature
+	headers={
+		'Api-Key': api_key, 
+		'X-Signature': signature
+	}
 	
 	url='https://api.test.hotelbeds.com/hotel-content-api/1.0/hotels/2?language=CAT&useSecondaryLanguage=false'
 	
-	resp = Response(url=url, headers=request.headers)
+	resp = Response(url=url, headers=request.headers=headers)
 	resp.headers['Access-Control-Allow-Origin'] = '*'
 	return resp
 
