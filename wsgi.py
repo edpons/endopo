@@ -1,7 +1,9 @@
 from flask import Flask
 import requests, time, hashlib
+from flask_cors import CORS
 
 application = Flask(__name__)
+CORS(app)
 
 api_key='emnrkrz4eetfaz6mgw7d5976'
 secret='RPPZsj4629'
@@ -26,8 +28,7 @@ def hotels():
 	url='https://api.test.hotelbeds.com/hotel-content-api/1.0/hotels/2?language=CAT&useSecondaryLanguage=false'
 	
 	resp = requests.get(url, headers=headers)
-	resp.headers['Access-Control-Allow-Origin'] = '*'
-	return resp
+	return r.text
 
 if __name__ == "__main__":
     application.run()
