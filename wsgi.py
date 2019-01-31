@@ -3,7 +3,7 @@ import requests, time, hashlib
 from flask_cors import CORS
 
 application = Flask(__name__)
-CORS(app)
+CORS(application)
 
 api_key='emnrkrz4eetfaz6mgw7d5976'
 secret='RPPZsj4629'
