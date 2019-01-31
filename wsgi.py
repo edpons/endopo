@@ -1,6 +1,4 @@
-from flask import Flask
-from flask import Response
-import requests
+from flask import Flask, request, Response
 import time, hashlib
 
 application = Flask(__name__)
@@ -16,18 +14,18 @@ def hello_world():
 
 @application.route('/aa')
 def hotels():
+	
 	sigStr = "%s%s%d" % (api_key,secret,int(time.time()))
 	signature = hashlib.sha256(sigStr.encode('utf-8')).hexdigest()
 
-	headers= {
-		'Api-Key': api_key, 
-		'X-Signature': signature
-	}
-
+	request.headers['Api-Key'] = api_key
+	request.headers['X-Signature'] = signature
+	
 	url='https://api.test.hotelbeds.com/hotel-content-api/1.0/hotels/2?language=CAT&useSecondaryLanguage=false'
-	r = requests.get(url, headers=headers)
-	r.headers['Access-Control-Allow-Origin'] = '*'
-	return r
+	
+	resp = Response(url, headers=headers)
+	resp.headers['Access-Control-Allow-Origin'] = '*'
+	return resp
 
 if __name__ == "__main__":
     application.run()
