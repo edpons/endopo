@@ -25,7 +25,7 @@ def hotels():
 	
 	url='https://api.test.hotelbeds.com/hotel-content-api/1.0/hotels/2?language=CAT&useSecondaryLanguage=false'
 	
-	resp = request.get(url, headers=headers)
+	resp = requests.get(url, headers=headers)
 	resp.headers['Access-Control-Allow-Origin'] = '*'
 	return resp
 
