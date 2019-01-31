@@ -9,7 +9,9 @@ secret='RPPZsj4629'
 
 @application.route('/')
 def hello_world():
-    return 'Hello, World!'
+    resp = flask.Response("Foo bar baz")
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    return resp
 
 @application.route('/aa')
 def hotels():
