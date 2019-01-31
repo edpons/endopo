@@ -27,7 +27,7 @@ def hotels():
 	
 	url='https://api.test.hotelbeds.com/hotel-content-api/1.0/hotels/2?language=CAT&useSecondaryLanguage=false'
 	
-	resp = requests.get(url, headers=headers)
+	r = requests.get(url, headers=headers)
 	return r.text
 
 if __name__ == "__main__":
