@@ -22,6 +22,7 @@ def hello_world():
 def hotels():
 	url='https://api.test.hotelbeds.com/hotel-content-api/1.0/hotels/1?language=CAT&useSecondaryLanguage=false'
 	r = requests.get(url, headers=headers)
+	r.headers['Access-Control-Allow-Origin'] = '*'
 	return r.text
 
 if __name__ == "__main__":
