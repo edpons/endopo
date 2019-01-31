@@ -1,4 +1,5 @@
 from flask import Flask
+from flask import Response
 import requests
 import time, hashlib
 
@@ -9,7 +10,7 @@ secret='RPPZsj4629'
 
 @application.route('/')
 def hello_world():
-    resp = flask.Response("Foo bar baz")
+    resp = Response("Foo bar baz")
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
 
