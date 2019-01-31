@@ -18,9 +18,9 @@ headers={
 def hello_world():
     return 'Hello, World!'
 
-@app.route('/aa/<id_hotel>')
-def hotels(id_hotel):
-	url='https://api.test.hotelbeds.com/hotel-content-api/1.0/hotels/<id_hotel>?language=CAT&useSecondaryLanguage=false'
+@app.route('/aa')
+def hotels():
+	url='https://api.test.hotelbeds.com/hotel-content-api/1.0/hotels/1?language=CAT&useSecondaryLanguage=false'
 	r = requests.get(url, headers=headers)
 	return r.text
 
