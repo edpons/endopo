@@ -4,7 +4,8 @@ import time, hashlib
 
 application = Flask(__name__)
 
-
+api_key='emnrkrz4eetfaz6mgw7d5976'
+secret='RPPZsj4629'
 
 @application.route('/')
 def hello_world():
@@ -12,12 +13,10 @@ def hello_world():
 
 @application.route('/aa')
 def hotels():
-	api_key='emnrkrz4eetfaz6mgw7d5976'
-	secret='RPPZsj4629'
 	sigStr = "%s%s%d" % (api_key,secret,int(time.time()))
 	signature = hashlib.sha256(sigStr.encode('utf-8')).hexdigest()
 
-	headers={
+	headers= {
 		'Api-Key': api_key, 
 		'X-Signature': signature
 	}
