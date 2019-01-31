@@ -25,4 +25,4 @@ def hotels(id_hotel):
 	return r.text
 
 if __name__ == "__main__":
-    application.run()
+    app.run()
