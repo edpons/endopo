@@ -2,7 +2,7 @@ from flask import Flask
 import requests
 import time, hashlib
 
-app = Flask(__name__)
+application = Flask(__name__)
 
 api_key='emnrkrz4eetfaz6mgw7d5976'
 secret='RPPZsj4629'
@@ -14,15 +14,15 @@ headers={
 'X-Signature': signature
 }
 
-@app.route('/')
+@application.route('/')
 def hello_world():
     return 'Hello, World!'
 
-@app.route('/aa')
+@application.route('/aa')
 def hotels():
 	url='https://api.test.hotelbeds.com/hotel-content-api/1.0/hotels/1?language=CAT&useSecondaryLanguage=false'
 	r = requests.get(url, headers=headers)
 	return r.text
 
 if __name__ == "__main__":
-    app.run()
+    application.run()
