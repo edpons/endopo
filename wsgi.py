@@ -10,76 +10,39 @@ secret='RPPZsj4629'
 
 url_prefix='https://api.test.hotelbeds.com'
 
+def headers():
+	sigStr = "%s%s%d" % (api_key,secret,int(time.time()))
+	signature = hashlib.sha256(sigStr.encode('utf-8')).hexdigest()
+
+	headers= {
+		'Api-Key': api_key, 
+		'X-Signature': signature
+	}
+	return headers
+
 @application.route('/')
 def hello_world():
 	#resp = Response("Foo bar baz")
 	#resp.headers['Access-Control-Allow-Origin'] = '*'
 	return 'Hello'
 
-@application.route('/hotels')
-def hotels():
-	
-	sigStr = "%s%s%d" % (api_key,secret,int(time.time()))
-	signature = hashlib.sha256(sigStr.encode('utf-8')).hexdigest()
-
-	headers= {
-		'Api-Key': api_key, 
-		'X-Signature': signature
-	}
-	
+@application.route('/hotels/hotel_code')
+def hotel_code():
 	url= url_prefix + '/hotel-content-api/1.0/hotels/2?language=CAT&useSecondaryLanguage=false'
-	
-	r = requests.get(url, headers=headers)
-	return r.text
-
-@application.route('/hotels/hotelCode')
-def hotels_hotel_code():
-	
-	sigStr = "%s%s%d" % (api_key,secret,int(time.time()))
-	signature = hashlib.sha256(sigStr.encode('utf-8')).hexdigest()
-
-	headers= {
-		'Api-Key': api_key, 
-		'X-Signature': signature
-	}
-	
-	url= url_prefix + '/hotel-content-api/1.0/hotels/1?language=ENG&useSecondaryLanguage=false'
-	
-	r = requests.get(url, headers=headers)
+	r = requests.get(url, headers=headers())
 	return r.text
 
 @application.route('/locations/countries')
 def countries():
-	
-	sigStr = "%s%s%d" % (api_key,secret,int(time.time()))
-	signature = hashlib.sha256(sigStr.encode('utf-8')).hexdigest()
-
-	headers= {
-		'Api-Key': api_key, 
-		'X-Signature': signature
-	}
-	
 	url= url_prefix + '/hotel-content-api/1.0/locations/countries?fields=all&language=ENG&from=1&to=100&useSecondaryLanguage=false'
-	
-	r = requests.get(url, headers=headers)
+	r = requests.get(url, headers=headers())
 	return r.text
 
 @application.route('/locations/destinations')
 def countries():
-	
-	sigStr = "%s%s%d" % (api_key,secret,int(time.time()))
-	signature = hashlib.sha256(sigStr.encode('utf-8')).hexdigest()
-
-	headers= {
-		'Api-Key': api_key, 
-		'X-Signature': signature
-	}
-	
 	url= url_prefix + '/hotel-content-api/1.0/locations/destinations?fields=all&language=ENG&from=1&to=100&useSecondaryLanguage=false'
-	
-	r = requests.get(url, headers=headers)
+	r = requests.get(url, headers=headers())
 	return r.text
-
 
 
 
