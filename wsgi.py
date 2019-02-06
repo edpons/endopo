@@ -39,7 +39,7 @@ def countries():
 	return r.text
 
 @application.route('/locations/destinations')
-def countries():
+def destinations():
 	url= url_prefix + '/hotel-content-api/1.0/locations/destinations?fields=all&language=ENG&from=1&to=100&useSecondaryLanguage=false'
 	r = requests.get(url, headers=headers())
 	return r.text
@@ -48,14 +48,6 @@ def countries():
 
 @application.route('/search')
 def aaa():
-	sigStr = "%s%s%d" % (api_key,secret,int(time.time()))
-	signature = hashlib.sha256(sigStr.encode('utf-8')).hexdigest()
-
-	headers= {
-		'Api-Key': api_key, 
-		'X-Signature': signature
-	}
-	
 	payload = {
 		"stay": {
 			"checkIn": "2019-06-08",
@@ -91,7 +83,7 @@ def aaa():
 	
 	url= url_prefix + 'hotel-api/1.0/hotels'
 	
-	r = requests.post(url, headers=headers, data=payload)
+	r = requests.post(url, headers=headers(), data=payload)
 	return r.text
 
 if __name__ == "__main__":
