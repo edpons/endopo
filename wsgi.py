@@ -75,7 +75,7 @@ def hotels():
 	
 	url='https://api.test.hotelbeds.com/hotel-api/1.0/hotels'
 	
-	r = requests.get(url, headers=headers, data=payload)
+	r = requests.post(url, headers=headers, data=payload)
 	return r.text
 
 if __name__ == "__main__":
