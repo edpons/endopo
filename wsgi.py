@@ -8,14 +8,16 @@ CORS(application)
 api_key='emnrkrz4eetfaz6mgw7d5976'
 secret='RPPZsj4629'
 
+url_prefix='https://api.test.hotelbeds.com'
+
 @application.route('/')
 def hello_world():
 	#resp = Response("Foo bar baz")
 	#resp.headers['Access-Control-Allow-Origin'] = '*'
 	return 'Hello'
 
-@application.route('/aa')
-def hotel_():
+@application.route('/hotels')
+def hotels():
 	
 	sigStr = "%s%s%d" % (api_key,secret,int(time.time()))
 	signature = hashlib.sha256(sigStr.encode('utf-8')).hexdigest()
@@ -25,13 +27,64 @@ def hotel_():
 		'X-Signature': signature
 	}
 	
-	url='https://api.test.hotelbeds.com/hotel-content-api/1.0/hotels/2?language=CAT&useSecondaryLanguage=false'
+	url= url_prefix + '/hotel-content-api/1.0/hotels/2?language=CAT&useSecondaryLanguage=false'
 	
 	r = requests.get(url, headers=headers)
 	return r.text
 
-@application.route('/hotels')
-def hotels():
+@application.route('/hotels/hotelCode')
+def hotels_hotel_code():
+	
+	sigStr = "%s%s%d" % (api_key,secret,int(time.time()))
+	signature = hashlib.sha256(sigStr.encode('utf-8')).hexdigest()
+
+	headers= {
+		'Api-Key': api_key, 
+		'X-Signature': signature
+	}
+	
+	url= url_prefix + '/hotel-content-api/1.0/hotels/1?language=ENG&useSecondaryLanguage=false'
+	
+	r = requests.get(url, headers=headers)
+	return r.text
+
+@application.route('/locations/countries')
+def countries():
+	
+	sigStr = "%s%s%d" % (api_key,secret,int(time.time()))
+	signature = hashlib.sha256(sigStr.encode('utf-8')).hexdigest()
+
+	headers= {
+		'Api-Key': api_key, 
+		'X-Signature': signature
+	}
+	
+	url= url_prefix + '/hotel-content-api/1.0/locations/countries?fields=all&language=ENG&from=1&to=100&useSecondaryLanguage=false'
+	
+	r = requests.get(url, headers=headers)
+	return r.text
+
+@application.route('/locations/destinations')
+def countries():
+	
+	sigStr = "%s%s%d" % (api_key,secret,int(time.time()))
+	signature = hashlib.sha256(sigStr.encode('utf-8')).hexdigest()
+
+	headers= {
+		'Api-Key': api_key, 
+		'X-Signature': signature
+	}
+	
+	url= url_prefix + '/hotel-content-api/1.0/locations/destinations?fields=all&language=ENG&from=1&to=100&useSecondaryLanguage=false'
+	
+	r = requests.get(url, headers=headers)
+	return r.text
+
+
+
+
+@application.route('/search')
+def aaa():
 	sigStr = "%s%s%d" % (api_key,secret,int(time.time()))
 	signature = hashlib.sha256(sigStr.encode('utf-8')).hexdigest()
 
@@ -73,7 +126,7 @@ def hotels():
 	  }
 	}
 	
-	url='https://api.test.hotelbeds.com/hotel-api/1.0/hotels'
+	url= url_prefix + 'hotel-api/1.0/hotels'
 	
 	r = requests.post(url, headers=headers, data=payload)
 	return r.text
