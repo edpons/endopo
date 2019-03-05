@@ -2,8 +2,6 @@ from flask import Flask
 import requests, time, hashlib
 from flask_cors import CORS
 
-from twilio.rest import Client
-
 application = Flask(__name__)
 CORS(application)
 
@@ -28,18 +26,7 @@ def hello_world():
 	#resp.headers['Access-Control-Allow-Origin'] = '*'
 	return 'Hello'
 
-@application.route('/trucar/')
-def trucar():
-	account_sid = 'ACb10d8bc1e852d5695213adb0e2741026'
-	auth_token = 'fd76d357c700546c40cf72c60b0da80e'
-	client = Client(account_sid, auth_token)
 
-	call = client.calls.create(
-                        url='http://demo.twilio.com/docs/voice.xml',
-                        to='+34664643323',
-                        from_='+34946665939'
-                    )
-	return 'trucant..'
 
 if __name__ == "__main__":
     application.run()
