@@ -29,7 +29,7 @@ def hello_world():
 	return 'Hello'
 
 @application.route('/trucar/')
-def hello_world():
+def trucar():
 	account_sid = 'ACb10d8bc1e852d5695213adb0e2741026'
 	auth_token = 'fd76d357c700546c40cf72c60b0da80e'
 	client = Client(account_sid, auth_token)
